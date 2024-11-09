@@ -28,4 +28,4 @@ for row in data:
     username, email, age, balance = row
     print(f'Имя: {username}| почта: {email}| возраст| {age}, баланс: {balance}')
 
-
+conn.close()
