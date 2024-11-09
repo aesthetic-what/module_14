@@ -18,6 +18,8 @@ for num in range(1,11):
 
 conn.commit()
 
+cursor.execute("DELETE FROM Users WHERE (id+2)%3 = ?", (0,))
+
 for num in range(1, 11):
     new_balance = 500
     cursor.execute("""UPDATE Users SET balance=(?) WHERE id % 2 = 1""", (new_balance, ))
