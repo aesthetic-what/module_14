@@ -5,7 +5,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram import Bot, Dispatcher
 
 import asyncio
-from crud_functions import get_all_products
+from crud_functions import get_all_products, initiate_db
 # import asyncio
 
 bot = Bot('7061646789:AAG93_Mw4fprHsi5aiuU7XEzr9PuYGv9XN0')
@@ -80,11 +80,12 @@ async def main():
 
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
+        
         for i in range(1, 5):
-            db = get_all_products()
+            title, description, price = get_all_products()
             with open(f'energy_{i}.jpg', 'rb') as img:
-                await message.answer_photo(img, f'Название: Product{db[i][0]} |'
-                                                f' Описание: описание {db[i][1]} | Цена: {db[i][2]}')
+                await message.answer_photo(img, f'Название: {title} |'
+                                                f' Описание: {description} | Цена: {price}')
         await message.answer('Выберите продукт для покупки: ', reply_markup=buy_keyboard)
 
 @dp.callback_query_handler(text='product_buying')
